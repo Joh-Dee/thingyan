@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>အမျိုးသမီး ဖုန်းအသုံးပြုနေပုံ Animation</title>
+<style>
+  /*  Layout */
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+    font-family: sans-serif;
+  }
+
+  /* Character အိမ် */
+  .character-scene {
+    position: relative;
+    width: 300px;
+    height: 400px;
+  }
+
+  /* --- ကိုယ်ထည် (အမျိုးသမီးပုံစံ) --- */
+  .woman {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 300px;
+    background-color: #ffcccc; /* အသားအရောင် */
+    border-radius: 75px 75px 20px 20px;
+  }
+
+  /* ဆံပင် */
+  .hair {
+    position: absolute;
+    top: -20px;
+    left: 10px;
+    width: 130px;
+    height: 100px;
+    background-color: #333; /* ဆံပင်အမည်း */
+    border-radius: 50px 50px 0 0;
+  }
+
+  /* မျက်လုံး (အိမ်) */
+  .eyes {
+    position: absolute;
+    top: 60px;
+    left: 35px;
+    width: 80px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* မျက်လုံး တစ်ဖက်စီ */
+  .eye {
+    width: 20px;
+    height: 20px;
+    background-color: #333;
+    border-radius: 50%;
+    /* မျက်တောင်ခတ်တဲ့ animation ထည့် */
+    animation: blink 4s infinite;
+  }
+
+  /* --- ဖုန်း --- */
+  .phone {
+    position: absolute;
+    top: 150px;
+    right: 20px;
+    width: 60px;
+    height: 110px;
+    background-color: #333; /* ဖုန်းကာဗာ */
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+
+  /* ဖုန်းမျက်နှာပြင် */
+  .screen {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #6dd5ed, #2193b0);
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* --- လက်မ/လက်ဖဝါး (ဖုန်းကိုင်ထားဟန်) --- */
+  .hand-holding {
+    position: absolute;
+    top: 190px;
+    right: -10px;
+    width: 40px;
+    height: 60px;
+    background-color: #ffcccc;
+    border-radius: 20px 5px 5px 20px;
+    transform: rotate(-15deg);
+  }
+
+  /* --- လက်ညှိုး (ဖုန်းနှိပ်ဟန်) --- */
+  .taping-finger {
+    position: absolute;
+    top: 170px;
+    right: 65px; /* ဖုန်းရဲ့ ဘယ်ဘက်ကနေ */
+    width: 15px;
+    height: 40px;
+    background-color: #ffcccc;
+    border-radius: 10px;
+    transform-origin: top center;
+    /* ဖုန်းနှိပ်တဲ့ animation ထည့် */
+    animation: tap 1.5s infinite;
+  }
+
+  /* --- မျက်နှာပြင် Ripple Effect --- */
+  .ripple {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    /* Ripple animation ထည့် */
+    animation: rippleEffect 1.5s infinite;
+  }
+
+  /* =========================================
+     ANIMATION KEYFRAMES (လှုပ်ရှားမှုများ)
+     ========================================= */
+
+  /* ၁။ မျက်တောင်ခတ်ခြင်း - မျက်လုံးကို scaleY နဲ့ မှိတ် */
+  @keyframes blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    93%, 97% { transform: scaleY(0.1); }
+  }
+
+  /* ၂။ ဖုန်းနှိပ်ခြင်း - လက်ညှိုးကို diagonal အတိုင်း လှုပ်ရှား */
+  @keyframes tap {
+    0%, 100% { transform: translate(0, 0) rotate(-15deg) scaleY(1); }
+    50% { transform: translate(15px, 10px) rotate(-15deg) scaleY(0.9); }
+  }
+
+  /* ၃။ Ripple Effect - မျက်နှာပြင်ပေါ်က အလင်းလှိုင်း */
+  @keyframes rippleEffect {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+    80% { transform: translate(-50%, -50%) scale(4); opacity: 0; }
+    100% { transform: translate(-50%, -50%) scale(4); opacity: 0; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="character-scene">
+  <div class="woman">
+    <div class="hair"></div>
+    <div class="eyes">
+      <div class="eye"></div>
+      <div class="eye"></div>
+    </div>
+  </div>
+  
+  <div class="hand-holding"></div>
+  
+  <div class="phone">
+    <div class="screen">
+      <div class="ripple"></div>
+    </div>
+  </div>
+  
+  <div class="taping-finger"></div>
+</div>
+
+</body>
+</html>
